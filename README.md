@@ -27,10 +27,11 @@ The +5% residual is plausibly tracking error plus the 40bps spread being a midpo
 ## Install
 
 ```bash
-pip install git+https://github.com/prismlfx/sma200-bt.git
+pip install sma200-bt
 ```
 
-(PyPI release coming once the API stabilizes.)
+[![PyPI](https://img.shields.io/pypi/v/sma200-bt.svg)](https://pypi.org/project/sma200-bt/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/prismlfx/sma200-bt/blob/master/LICENSE)
 
 ## Usage
 
