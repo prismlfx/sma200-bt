@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sma200-bt"
+version = "0.1.0"
+description = "Testfolio-compatible synthetic leveraged-ETF return series, with proper borrow-cost modeling. Calibrated against real TQQQ to within 5%."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Christian", email = "christian@prismaticenterprises.co"},
+]
+keywords = ["leveraged-etf", "letf", "backtest", "tqqq", "upro", "soxl", "synthetic", "sma200", "trend-following"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "yfinance>=0.2.40",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.urls]
+Homepage = "https://sma200.trade"
+Repository = "https://github.com/prismlfx/sma200-bt"
+Article = "https://sma200.trade/learn/leveraged-etf-borrow-cost"
+Issues = "https://github.com/prismlfx/sma200-bt/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
