@@ -37,7 +37,7 @@ dev = [
 [project.urls]
 Homepage = "https://sma200.trade"
 Repository = "https://github.com/prismlfx/sma200-bt"
-Article = "https://sma200.trade/learn/leveraged-etf-borrow-cost"
+Article = "https://sma200.trade/articles/leveraged-etf-borrow-cost"
 Issues = "https://github.com/prismlfx/sma200-bt/issues"
 
 [tool.setuptools.packages.find]

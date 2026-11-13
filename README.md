@@ -1,5 +1,8 @@
 # sma200-bt
 
+[![PyPI](https://img.shields.io/pypi/v/sma200-bt.svg)](https://pypi.org/project/sma200-bt/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/prismlfx/sma200-bt/blob/master/LICENSE)
+
 **Testfolio-compatible synthetic leveraged-ETF return series for Python, with proper borrow-cost modeling.** Calibrated against real TQQQ to within 5% over the 2015-2024 window.
 
 Most synthetic LETF backtests floating around Reddit, Bogleheads, and finance blogs use the simplified formula `L * daily_return - ER / 252`, which omits the daily borrow cost real leveraged ETFs pay on their swap-financed exposure. That simplified formula **overstates real TQQQ by 62%** over 2015-2024.
@@ -18,11 +21,20 @@ The third term models the swap-financing cost that ProShares (and every other sw
 
 | Method | Final wealth multiple ($1 →) | Drift vs real TQQQ |
 |---|---:|---:|
-| **Real TQQQ** (ProShares fund) | 20.41× | — |
+| **Real TQQQ** (ProShares fund) | 20.41× | baseline |
 | Simple formula (no borrow cost) | 33.00× | **+62%** |
 | **sma200-bt** (^IRX + 40bps spread) | 21.46× | **+5%** |
 
 The +5% residual is plausibly tracking error plus the 40bps spread being a midpoint estimate of ProShares' actual swap pricing. Well within the noise band for research purposes.
+
+![Synthetic 3x QQQ vs real TQQQ, 2015-2024](https://raw.githubusercontent.com/prismlfx/sma200-bt/master/docs/calibration_tqqq.png)
+
+Reproduce the table and chart from live Yahoo Finance data:
+
+```bash
+pip install sma200-bt matplotlib
+python examples/calibrate_tqqq.py --plot
+```
 
 ## Install
 
@@ -30,8 +42,6 @@ The +5% residual is plausibly tracking error plus the 40bps spread being a midpo
 pip install sma200-bt
 ```
 
-[![PyPI](https://img.shields.io/pypi/v/sma200-bt.svg)](https://pypi.org/project/sma200-bt/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/prismlfx/sma200-bt/blob/master/LICENSE)
 
 ## Usage
 
@@ -104,7 +114,15 @@ Compound a daily return series into an equity curve.
 
 ## Background
 
-This library was extracted from internal research at [sma200.trade](https://sma200.trade) after discovering that synthetic LETF numbers we'd published on Reddit had been computed with the simplified formula. Full writeup of the bug, the fix, and what the corrected numbers actually show about the SMA200 trend filter: **[The Hidden Cost Every Leveraged-ETF Backtest Ignores](https://sma200.trade/learn/leveraged-etf-borrow-cost)**.
+This library was extracted from internal research at [sma200.trade](https://sma200.trade) after discovering that synthetic LETF numbers we'd published on Reddit had been computed with the simplified formula. Full writeup of the bug, the fix, and what the corrected numbers actually show about the SMA200 trend filter: **[The Hidden Cost Every Leveraged-ETF Backtest Ignores](https://sma200.trade/articles/leveraged-etf-borrow-cost)**.
+
+## Research built on it
+
+Studies at sma200.trade that use these series:
+
+- [Borrow-cost correction for synthetic leveraged ETFs](https://sma200.trade/research/borrow-cost-correction-synthetic-letf): the bug, the fix, and revised synthetic TQQQ numbers back to 1999
+- [Full leverage spectrum](https://sma200.trade/research/full-leverage-spectrum): 1x, 2x and 3x, buy-and-hold vs a 200-day SMA filter, across SPY, QQQ, ^SOX, gold and silver
+- [Leverage vs volatility per underlying](https://sma200.trade/research/leverage-vs-volatility-per-underlying): how volatility decay interacts with leverage and the SMA filter on SPY, QQQ and ^SOX
 
 ## Run the tests
 
